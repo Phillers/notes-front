@@ -1,17 +1,44 @@
-export default {
-  MAX_ATTACHMENT_SIZE: 5000000,
+const dev = {
   s3: {
     REGION: "us-east-1",
-    BUCKET: "wiaderkonanotatki"
+    BUCKET: "notes-api-dev-attachmentsbucket-1sleykps87ozo"
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://05zd64onr0.execute-api.us-east-1.amazonaws.com/dev"
+    URL: "https://txlr5digzh.execute-api.us-east-1.amazonaws.com/dev"
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_fS9nznahZ",
-    APP_CLIENT_ID: "5ibn7aio9gudt17jloe4s2dikv",
-    IDENTITY_POOL_ID: "us-east-1:a8ee397c-bdbf-491f-af8d-6594f08b27a1"
+    USER_POOL_ID: "us-east-1_mZrqu9aG0",
+    APP_CLIENT_ID: "5h5ftjf1ulodoqvr60hr7ga5th",
+    IDENTITY_POOL_ID: "us-east-1:80422d3b-7294-4bad-90d4-aa17632dfe32"
   }
+};
+
+const prod = {
+  s3: {
+    REGION: "us-east-1",
+    BUCKET: "notes-api-prod-attachmentsbucket-1rwn19gm82v94"
+  },
+  apiGateway: {
+    REGION: "us-east-1",
+    URL: "https://37wbbdkwof.execute-api.us-east-1.amazonaws.com/prod"
+  },
+  cognito: {
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_z0wSsVDHL",
+    APP_CLIENT_ID: "3g4i5n19qe7i9dn4qdcfm9mmju",
+    IDENTITY_POOL_ID: "us-east-1:8adaaa23-002e-4bd1-98be-10997eed7c9c"
+  }
+};
+
+// Default to dev if not set
+const config = process.env.REACT_APP_STAGE === 'prod'
+  ? prod
+  : dev;
+
+export default {
+  // Add common config values here
+  MAX_ATTACHMENT_SIZE: 5000000,
+  ...config
 };
